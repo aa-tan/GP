@@ -1,0 +1,22 @@
+html
+    head
+        title= title
+    body
+        h1= message
+        form(
+            name="myform"
+            action="/login"
+            method="post"
+        )
+            input(
+                type="text"
+                name="username"
+                placeholder="username"
+            )
+            input(
+                type="password"
+                name="password"
+            )
+            input(
+                type="submit" 
+            )
