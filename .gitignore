@@ -1,3 +1,6 @@
+xj# vim
+*.swp
+
 # Macos
 .DS_Store
 
