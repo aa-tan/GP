@@ -6,7 +6,7 @@ var viewPath = path.join(__dirname, 'views');
 var express = require('express');
 const axios = require('axios');
 var router = express.Router();
-
+var buildQuery  = require('./util').buildQuery
 var url = require('url')
 
 // Routes
@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 
 // Successful login
 router.get('/done', (req, res) => {
-    axios.post('http://localhost:5000/post', {typingspeed:req.query['typingspeed']})
-    .then(function (response) {
+    axios.post('http://localhost:5000/post', req.query)
+    .then((response) => {
         if(response['data'] == 'True'){
             res.send('Yay')
         }
@@ -28,7 +28,7 @@ router.get('/done', (req, res) => {
             res.redirect('/fail')
         }
     })
-    .catch(function (error) {
+    .catch((error) => {
         console.log(error);
         res.redirect('/fail')
     }); 
@@ -51,10 +51,9 @@ router.post('/login', (req, res)=> {
             if (err) throw err;
             if(result.length != 0){ 
                 if(password == result[0]["password"]){  
-                    console.log(req.body.typingspeed)
                     res.redirect(url.format({
                         pathname:"/done",
-                        query: {typingspeed:req.body.typingspeed}
+                        query: buildQuery(req)
                     }))
                 }
                 else {
