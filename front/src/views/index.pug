@@ -1,10 +1,12 @@
 html
     head
         title= title
+        script(src="/scripts/script.js")
     body
         h1= message
         form(
             name="myform"
+            id="login_form"
             action="/login"
             method="post"
         )
@@ -12,16 +14,27 @@ html
                 type="text"
                 name="username"
                 placeholder="username"
+                onkeypress="keyPressed('username')"
             )
             input(
                 type="password"
                 name="password"
+                onkeypress="keyPressed('password')"
             )
             input(
-                type="submit" 
+                type="button"
+                value="submit"
+                onclick="formSubmit()"
             )
             input(
                 type="hidden"
-                name="typingspeed"
+                name="speedUser"
+                id="speedUser"
+                value=100
+            )
+            input(
+                type="hidden"
+                name="speedPass"
+                id="speedPass"
                 value=100
             )
