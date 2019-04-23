@@ -13,19 +13,26 @@ var url = require('url')
 
 // Home page
 router.get('/', (req, res) => {
-    res.render('index', {title:'hey', message:'this is a message'});
+    res.render('index', {title:'hey', message:'this is my GP'});
     //res.send('<b>test</b>')
 })
 
 // Successful login
 router.get('/done', (req, res) => {
-    axios.post('http://localhost:5000/post', req.query)
+    var post_url = 'http://localhost:5000/post'
+    if(process.env.TEST == "TRUE"){
+        post_url = 'http://localhost:5000/add'
+    }
+    axios.post(post_url, req.query)
     .then((response) => {
         if(response['data'] == 'True'){
             res.send('Yay')
         }
-        else{
+        else if(response['data'] == 'False'){
             res.redirect('/fail')
+        }
+        else if(response['data'] == 'Redirect'){
+            res.redirect('/')
         }
     })
     .catch((error) => {
@@ -53,7 +60,7 @@ router.post('/login', (req, res)=> {
                 if(password == result[0]["password"]){  
                     res.redirect(url.format({
                         pathname:"/done",
-                        query: buildQuery(req)
+                        query: buildQuery(req, result[0]["_id"])
                     }))
                 }
                 else {
