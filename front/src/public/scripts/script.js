@@ -11,6 +11,10 @@ function keyPressed(ele){
     }
 }
 
+function focusForm(){
+    document.getElementById("username").focus()
+}
+
 function formSubmit(){
     document.getElementById("speedUser").value = calculateSpeed("username")
     document.getElementById("speedPass").value = calculateSpeed("password")
