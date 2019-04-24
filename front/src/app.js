@@ -12,10 +12,21 @@ app.set('views', viewPath);
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('src/public'))
+app.use(express.static('src/public'));
 //app.use(express.cookieSession());
 
-app.use(require('./controllers/routes'))
+
+if(process.env.MODE == "ADMIN"){
+    app.use(require('./controllers/admin'));
+}
+else if(process.env.MODE=="TRAIN"){
+    app.use(require('./controllers/train'));
+}
+else if(process.env.MODE=="TEST"){
+    app.use(require('./controllers/test'));
+}
+
+app.use(require('./controllers/main'))
 
 
 app.listen(port, () => console.log(`App is listening on localhost://${port}!`))
