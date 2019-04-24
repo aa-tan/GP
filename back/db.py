@@ -6,7 +6,9 @@ def authenticate(body):
     return True
 
 def saveData(data):
-    user_data = db[data["id"]]
+    users = db.users
+    user_id = users.find_one({"username":data["username"]})["_id"]
+    user_data = db[str(user_id)]
     user_data.insert_one(data)
 
 

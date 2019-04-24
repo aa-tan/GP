@@ -19,18 +19,14 @@ def login_process():
         return "False"
     return "Error"
 
-@app.route("/")
-def hello():
-    return "Hello World!"
-
-@app.route("/post", methods = ['POST'])
-def post_route():
+@app.route("/train", methods= ['POST'])
+def train_db():
     if request.method == 'POST':
         data = bytes_to_object(request.data)
-        if authenticate(data):
+        if check_credentials(data):
             saveData(data)
-            print(data)
             return "True"
+        else:
     return "False"
 
 @app.route("/add", methods= ['POST'])
