@@ -18,7 +18,7 @@ router.post('/train', (req, res) => {
     })
     .catch((error)=>{
         console.log(error);
-        res.redirect('/fail');
+        res.redirect('/failure');
     })
 })
 
