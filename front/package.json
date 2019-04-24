@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "TEST=FALSE nodemon src/app.js",
-    "train": "TEST=TRUE nodemon src/app.js"
+    "admin": "MODE=ADMIN nodemon src/app.js",
+    "train": "MODE=TRAIN nodemon src/app.js",
+    "test":"MODE=TEST nodemon src/app.js"
   },
   "author": "",
   "license": "ISC",
