@@ -4,10 +4,20 @@ from flask_cors import CORS
 from util import *
 from db import *
 
+
 app = Flask(__name__)
 
-CORS(app)
+#CORS(app)
 
+@app.route("/authenticate", methods = ['POST'])
+def login_process():
+    data = bytes_to_object(request.data)
+    if request.method == 'POST':
+        if check_credentials(data):
+            if check_behavior(data):
+                return "True"
+        return "False"
+    return "Error"
 
 @app.route("/")
 def hello():
