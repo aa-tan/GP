@@ -27,12 +27,15 @@ def train_db():
             saveData(data)
             return "True"
         else:
-    return "False"
+            return "False"
 
-@app.route("/add", methods= ['POST'])
-def train_db():
+@app.route("/new_user", methods= ['POST'])
+def new_user():
     if request.method == 'POST':
         data = bytes_to_object(request.data)
-        saveData(data)
-        return "Redirect"
-
+        password = random_password()
+        res = create_user(data['username'], password)
+        print(res['username'])
+        return '{{"username": "{}", "password": "{}"}}'.format(res['username'], res['password'])
+    else:
+        return "False"
