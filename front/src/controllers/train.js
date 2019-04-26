@@ -3,7 +3,7 @@ var router = express.Router();
 const axios = require('axios');
 
 router.get('/',(req, res)=>{
-    res.render('test', {title:'hey', message:'Training Mode', submitPath:"/train"})
+    res.render('input_form', {title:'hey', message:'Training Mode', submitPath:"/train"})
 })
 
 router.post('/train', (req, res) => {

@@ -7,7 +7,7 @@ var buildQuery  = require('./util').buildQuery
 
 // Home page
 router.get('/', (req, res) => {
-    res.render('test', {title:'hey', message:'Testing Mode', submitPath:"/login"});
+    res.render('input_form', {title:'hey', message:'Testing Mode', submitPath:"/login"});
 })
 
 
