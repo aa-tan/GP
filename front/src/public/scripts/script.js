@@ -4,7 +4,7 @@ var password_timestamps = [];
 var timestamp = null;
 var last_mouse_x = null;
 var last_mouse_y = null;
-var typingSpeed = 0;
+var mouseSpeed = [];
 
 function keyPressed(ele){
     if(ele == "username"){
@@ -15,8 +15,27 @@ function keyPressed(ele){
     }
 }
 
-function focusForm(){
-    document.getElementById("username").focus();
+function addListener(){
+    document.body.addEventListener("mousemove", (event) => {
+        if(timestamp == null){
+            timestamp = Date.now();
+            last_mouse_x = event.screenX;
+            last_mouse_y = event.screenY;
+            return
+}
+        var now = Date.now();
+        var dt = now - timestamp;
+        var dx = event.screenX - last_mouse_x;
+        var dy = event.screenY - last_mouse_y;
+        var distance = Math.sqrt(Math.pow(dx, 2)+Math.pow(dy, 2));
+        if(mouseSpeed.length == 200){
+            mouseSpeed.shift();
+        }
+        mouseSpeed.push(distance / dt);
+        timestamp = now;
+        lastMouseX = event.screenX;
+        lastMouseY = event.screenY;
+    })
 }
 
 function formSubmit(){
@@ -39,27 +58,13 @@ function calculateTypingSpeed(type){
 }
 
 function calculateMouseSpeed(){
-    var mouseSum = 0;
-    for(var i = 0; i < speed.length; i++){
-        mouseSum += speed[i]; 
+    if(mouseSpeed == []){
+        return 0;
     }
-    return mouseSum/speed.length
+    var mouseSum = 0.0;
+    for(var i = 0; i < mouseSpeed.length; i++){
+        mouseSum += mouseSpeed[i];
 }
-
-document.body.addEventListener("mousemove", (event) => {
-    if(timestamp == null){
-        timestamp = Date.now();
-        last_mouse_x = event.screenX;
-        last_mouse_y = event.screenY;
+    var avg = mouseSum/mouseSpeed.length
+    return avg
     } 
-
-    var now = Date.now();
-    var dt = now - timestamp;
-    var dx = event.screenX - last_mouse_x;
-    var dy = event.screenY - last_mouse_y;
-    var distance = Math.sqrt(Math.pow(dx)+Math.pow(dy));
-    typingSpeed = distance / dt;
-    timestamp = now;
-    lastMouseX = event.screenX;
-    lastMouseY = event.screenY;
-})
