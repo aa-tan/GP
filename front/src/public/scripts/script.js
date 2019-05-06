@@ -5,6 +5,7 @@ var timestamp = null;
 var last_mouse_x = null;
 var last_mouse_y = null;
 var mouseSpeed = [];
+var mouseEvents = 0
 
 function keyPressed(ele){
     if(ele == "username"){
@@ -17,12 +18,13 @@ function keyPressed(ele){
 
 function addListener(){
     document.body.addEventListener("mousemove", (event) => {
+        mouseEvents += 1
         if(timestamp == null){
             timestamp = Date.now();
             last_mouse_x = event.screenX;
             last_mouse_y = event.screenY;
             return
-}
+        }
         var now = Date.now();
         var dt = now - timestamp;
         var dx = event.screenX - last_mouse_x;
@@ -42,6 +44,7 @@ function formSubmit(){
     document.getElementById("speedUser").value = calculateTypingSpeed("username");
     document.getElementById("speedPass").value = calculateTypingSpeed("password");
     document.getElementById("speedMouse").value = calculateMouseSpeed();
+    document.getElementById("mouseMoveEvents").value = mouseEvents
     document.getElementById("login_form").submit();
 }
 
@@ -64,7 +67,7 @@ function calculateMouseSpeed(){
     var mouseSum = 0.0;
     for(var i = 0; i < mouseSpeed.length; i++){
         mouseSum += mouseSpeed[i];
-}
+    }
     var avg = mouseSum/mouseSpeed.length
     return avg
-    } 
+}
