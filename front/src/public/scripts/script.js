@@ -45,6 +45,7 @@ function formSubmit(){
     document.getElementById("speedPass").value = calculateTypingSpeed("password");
     document.getElementById("speedMouse").value = calculateMouseSpeed();
     document.getElementById("mouseMoveEvents").value = mouseEvents
+    document.getElementById("browser").value = window.navigator.userAgent
     document.getElementById("login_form").submit();
 }
 
