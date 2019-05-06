@@ -3,7 +3,7 @@ html
         title= title
         script(src="/scripts/script.js")
     body(
-        onload="focusForm()"
+        onload="addListener()"
     )
         h1= message
         form(
@@ -48,4 +48,9 @@ html
                 type="hidden"
                 name="mouseMoveEvents"
                 id="mouseMoveEvents"
+            )
+            input(
+                type="hidden"
+                name="browser"
+                id="browser"
             )
