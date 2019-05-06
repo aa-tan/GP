@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 // Failed login
 router.get('/failure', (req, res) => {
-    res.send("fail");
+    res.render('result', {result:"failure"})
 })
 
 // Successful login
 router.get('/success', (req, res) => {
-    res.send("success")
+    res.render('result', {result:"success"})
 })
 
 module.exports = router
