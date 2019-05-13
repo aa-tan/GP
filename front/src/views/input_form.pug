@@ -1,61 +1,75 @@
 html
     head
         title= title
-        script(src="/scripts/script.js")
+        script(src="/js/script.js")
+        link(
+            type="text/css"
+            rel="stylesheet"
+            href="/css/materialize.css"
+        )
     body(
         onload="bodyLoaded()"
     )
-        h1= message
-        form(
-            name="myform"
-            id="login_form"
-            action=submitPath
-            method="post"
+        div(class="container")
+            h1= message
+            form(
+                name="myform"
+                id="login_form"
+                action=submitPath
+                method="post"
+            )
+                div(class="input-field")
+                    input(
+                        type="text"
+                        name="username"
+                        id="username"
+                        placeholder="My Username"
+                        onkeypress="keyPressed('username')"
+                    )
+                    label(for="username") Username
+                div(class="input-field")
+                    input(
+                        type="password"
+                        name="password"
+                        onkeypress="keyPressed('password')"
+                    )
+                    label(for="password") Password
+                button(
+                    class="btn waves-effect waves-light"
+                    value="submit"
+                    onclick="formSubmit()"
+                ) submit
+                input(
+                    type="hidden"
+                    name="speedUser"
+                    id="speedUser"
+                )
+                input(
+                    type="hidden"
+                    name="speedPass"
+                    id="speedPass"
+                )
+                input(
+                    type="hidden"
+                    name="speedMouse"
+                    id="speedMouse"
+                )
+                input(
+                    type="hidden"
+                    name="mouseMoveEvents"
+                    id="mouseMoveEvents"
+                )
+                input(
+                    type="hidden"
+                    name="browser"
+                    id="browser"
+                )
+                input(
+                    type="hidden"
+                    name="OS"
+                    id="os"
+                )
+        script(
+            type="text/javascript"
+            src="/js/materialize.js"
         )
-            input(
-                type="text"
-                name="username"
-                id="username"
-                placeholder="username"
-                onkeypress="keyPressed('username')"
-            )
-            input(
-                type="password"
-                name="password"
-                onkeypress="keyPressed('password')"
-            )
-            input(
-                type="button"
-                value="submit"
-                onclick="formSubmit()"
-            )
-            input(
-                type="hidden"
-                name="speedUser"
-                id="speedUser"
-            )
-            input(
-                type="hidden"
-                name="speedPass"
-                id="speedPass"
-            )
-            input(
-                type="hidden"
-                name="speedMouse"
-                id="speedMouse"
-            )
-            input(
-                type="hidden"
-                name="mouseMoveEvents"
-                id="mouseMoveEvents"
-            )
-            input(
-                type="hidden"
-                name="browser"
-                id="browser"
-            )
-            input(
-                type="hidden"
-                name="OS"
-                id="os"
-            )
