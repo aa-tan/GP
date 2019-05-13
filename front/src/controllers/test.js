@@ -1,7 +1,6 @@
 var express = require('express');
 const axios = require('axios');
 var router = express.Router();
-var buildQuery  = require('./util').buildQuery
 
 // Routes
 
