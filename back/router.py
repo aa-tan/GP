@@ -1,13 +1,10 @@
 from flask import Flask
 from flask import request
-from flask_cors import CORS
 from util import *
 from db import *
 
 
 app = Flask(__name__)
-
-#CORS(app)
 
 @app.route("/authenticate", methods = ['POST'])
 def login_process():
@@ -35,7 +32,6 @@ def new_user():
         data = bytes_to_object(request.data)
         password = random_password()
         res = create_user(data['username'], password)
-        print(res['username'])
         return '{{"username": "{}", "password": "{}"}}'.format(res['username'], res['password'])
     else:
         return "False"
