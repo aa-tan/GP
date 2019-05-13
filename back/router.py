@@ -21,7 +21,7 @@ def train_db():
     if request.method == 'POST':
         data = bytes_to_object(request.data)
         if check_credentials(data):
-            saveData(data)
+            save_data(data)
             return "True"
         else:
             return "False"

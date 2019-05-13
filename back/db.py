@@ -5,7 +5,7 @@ db = client.gp
 def authenticate(body):
     return True
 
-def saveData(data):
+def save_data(data):
     users = db.users
     user_id = users.find_one({"username":data["username"]})["_id"]
     user_data = db[str(user_id)]
