@@ -25,8 +25,11 @@ else if(process.env.MODE=="TRAIN"){
 else if(process.env.MODE=="TEST"){
     app.use(require('./controllers/test'));
 }
+else if(process.env.MODE=="MAIN"){
+    app.use(require('./controllers/main'));
+}
 
-app.use(require('./controllers/main'))
+app.use(require('./controllers/results'));
 
 
 app.listen(port, () => console.log(`App is listening on localhost://${port}!`))
