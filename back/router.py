@@ -12,8 +12,11 @@ def login_process():
     if request.method == 'POST':
         if check_credentials(data):
             if check_behavior(data):
+                client.close()
                 return "True"
+        client.close()
         return "False"
+    client.close()
     return "Error"
 
 @app.route("/train", methods= ['POST'])
@@ -22,8 +25,10 @@ def train_db():
         data = bytes_to_object(request.data)
         if check_credentials(data):
             save_data(data)
+            client.close()
             return "True"
         else:
+            client.close()
             return "False"
 
 @app.route("/new_user", methods= ['POST'])
@@ -32,6 +37,8 @@ def new_user():
         data = bytes_to_object(request.data)
         password = random_password()
         res = create_user(data['username'], password)
+        client.close()
         return '{{"username": "{}", "password": "{}"}}'.format(res['username'], res['password'])
     else:
+        client.close()
         return "False"
