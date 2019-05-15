@@ -1,20 +1,26 @@
 html
     head
         title add a user
+        link(
+            type="text/css"
+            rel="stylesheet"
+            href="/css/materialize.css"
+        )        
     body
-        h1 add a user
-        form(
-            name="myform"
-            id="login_form"
-            action="/add_user"
-            method="post"
-        )
-            input(
-                type="text"
-                name="username"
-                placeholder="username"
+        div(class="container")
+            h1 add a user
+            form(
+                name="myform"
+                id="login_form"
+                action="/add_user"
+                method="post"
             )
-            input(
-                type="submit"
-                value="submit"
-            )
+                input(
+                    type="text"
+                    name="username"
+                    placeholder="username"
+                )
+                button(
+                    class="btn waves-effect waves-light"
+                    type="submit"
+                ) Submit

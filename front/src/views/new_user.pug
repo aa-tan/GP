@@ -1,9 +1,15 @@
 html
     head
         title new user!
+        link(
+            type="text/css"
+            rel="stylesheet"
+            href="/css/materialize.css"
+        )
     body
-        h1 Here are your credentials!
-        h3 Your Username:
-        p=username
-        h3 Your Password:
-        p=password
+        div(class="container")
+            h1 Here are your credentials!
+            h5 Your Username:
+            h3=username
+            h5 Your Password:
+            h3=password

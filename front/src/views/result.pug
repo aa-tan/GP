@@ -1,11 +1,16 @@
 html
     head
         title RESULTS
-    body
-        h1 Results 
-        p=result
-        input(
-            type="Button"
-            onclick="window.location='/'"
-            value="Return"
+        link(
+            type="text/css"
+            rel="stylesheet"
+            href="/css/materialize.css"
         )
+    body
+        div(class="container")
+            h1 Results 
+            h4=result
+            button(
+                class="btn waves-effect waves-light"
+                onclick="window.location='/'"
+            ) Return
