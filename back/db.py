@@ -7,9 +7,9 @@ def authenticate(body):
 
 def save_data(data):
     users = db.users
-    user_id = users.find_one({"username":data["username"]})["_id"]
-    user_data = db[str(user_id)]
-    user_data.insert_one(data)
+    collection_name = f"{data['username']}_{data['OS']}"
+    collection = db[collection_name]
+    collection.insert_one(data)
 
 
 def create_user(name, pword):
