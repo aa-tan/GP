@@ -42,11 +42,13 @@ function bodyLoaded(){
     formatUserAgent()
 }
 
-// Gets all date from the user OwO
+// Gets all date from the user owo
 function formSubmit(){
     // Typing speedz for username and password fields
     document.getElementById("speedUser").value = calculateTypingSpeed("username");
     document.getElementById("speedPass").value = calculateTypingSpeed("password");
+    document.getElementById("deltaUser").value = calculateTypingDelta("username");
+    document.getElementById("deltaPass").value = calculateTypingDelta("password");
     // Avg mouse movement speeds and overall move events
     document.getElementById("speedMouse").value = calculateMouseSpeed();
     document.getElementById("mouseMoveEvents").value = mouseEvents
@@ -104,4 +106,23 @@ function formatOS(agentstring){
     if(agentstring.includes("Macintosh")){
         userAgent["OS"] = "Macintosh"
     }
+}
+
+function calculateTypingDelta(element){
+    var typingTimestamps;
+    var timeDeltas = []
+    if(element == "username"){
+        typingTimestamps = username_timestamps;
+    }
+    else if(element == "password"){
+        typingTimestamps = password_timestamps;
+    }
+    else{
+        return ""
+    }
+
+    for(var i = 1; i < typingTimestamps.length; i++){
+       timeDeltas.push(typingTimestamps[i]-typingTimestamps[i-1]) 
+    }
+    return timeDeltas.toString();
 }
