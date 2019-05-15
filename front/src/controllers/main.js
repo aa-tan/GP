@@ -1,13 +1,6 @@
 var express = require('express');
-var router = express.Router();
-// Failed login
-router.get('/failure', (req, res) => {
-    res.render('result', {result:"failure"})
-})
+var router = express.router();
 
-// Successful login
-router.get('/success', (req, res) => {
-    res.render('result', {result:"success"})
+router.get('/', (req, res) => {
+    res.render('input_form');
 })
-
-module.exports = router
