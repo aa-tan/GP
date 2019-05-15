@@ -1,6 +1,3 @@
-var MongoClient = require('mongodb').MongoClient;
-const dbpath = "mongodb://localhost:27017/gp";
-
 var express = require('express');
 var router = express.Router();
 
