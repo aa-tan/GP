@@ -15,7 +15,7 @@ router.post('/login', (req, res)=> {
     name = req.body.username;
     password = req.body.password;
     console.log(req.body)
-    axios.post('http://localhost:5000/authenticate', req.body)
+    axios.post(`http://${process.env.BACK_SERVICE}:${process.env.BACK_PORT}/authenticate`, req.body)
     .then((response) => {
         if(response['data'] == 'True'){
             res.redirect('/success')

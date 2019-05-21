@@ -7,7 +7,7 @@ router.get('/',(req, res)=>{
 })
 
 router.post('/train', (req, res) => {
-    axios.post('http://localhost:5000/train', req.body)
+    axios.post(`http://${process.env.BACK_SERVICE}:${process.env.BACK_PORT}/train`, req.body)
     .then((response)=>{
         if(response['data'] == "True"){
             res.redirect('/');

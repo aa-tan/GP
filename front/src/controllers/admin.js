@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
 // Handles adding user
 router.post('/add_user', (req, res) => {
-    axios.post('http://localhost:5000/new_user', req.body)
+    axios.post(`http://${process.env.BACK_SERVICE}:${process.env.BACK_PORT}/new_user`, req.body)
     .then((response) => {
         if(response['data'] != "False"){
             name = response['data']['username']
