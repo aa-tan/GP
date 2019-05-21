@@ -42,4 +42,4 @@ else if(process.env.MODE=="MAIN"){
 app.use(require('./controllers/results'));
 
 
-app.listen(port, () => console.log(`App is listening on localhost://${port}! ENV=${process.env.ENV}`))
+app.listen(port, () => console.log(`App is listening on ${process.env.FRONT_SERVICE}://${port}! ENV=${process.env.ENV}`))
