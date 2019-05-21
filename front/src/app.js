@@ -1,13 +1,4 @@
 // Express variable declarations
-var env_path = '../config/'
-if(process.env.ENV == 'PROD'){
-    env_path += 'prod.env'
-}
-else{
-    env_path += 'dev.env'
-    process.env.ENV = 'DEV'
-}
-require('dotenv').config({path: env_path})
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();

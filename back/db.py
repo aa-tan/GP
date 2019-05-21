@@ -1,14 +1,5 @@
-from pymongo import MongoClient
-from pathlib import Path
-from dotenv import load_dotenv
 import os
-
-if os.environ.get('ENV') == 'PROD':
-    env_path = Path('..') / 'config/prod.env'
-else:
-    env_path = Path('..') / 'config/dev.env'
-load_dotenv(dotenv_path=env_path)
-
+from pymongo import MongoClient
 
 client = MongoClient(os.getenv('DB_SERVICE', 'localhost'), int(os.getenv('DB_PORT', 27017)))
 db = client.gp
