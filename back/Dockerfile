@@ -10,4 +10,4 @@ EXPOSE 5000
 
 ENV NAME Backend
 
-CMD ["ENV='PROD'", "python", "server.py"]
+CMD ["python", "server.py"]
