@@ -1,8 +1,17 @@
 // Express variable declarations
+var env_path = '../config/'
+if(process.env.ENV == 'PROD'){
+    env_path += 'prod.env'
+}
+else{
+    env_path += 'dev.env'
+    process.env.ENV = 'DEV'
+}
+require('dotenv').config({path: env_path})
 const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = process.env.FRONT_PORT;
 
 var path = require('path');
 var viewPath = path.join(__dirname, 'views');
@@ -33,4 +42,4 @@ else if(process.env.MODE=="MAIN"){
 app.use(require('./controllers/results'));
 
 
-app.listen(port, () => console.log(`App is listening on localhost://${port}!`))
+app.listen(port, () => console.log(`App is listening on localhost://${port}! ENV=${process.env.ENV}`))
