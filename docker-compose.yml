@@ -1,0 +1,20 @@
+version: '3'
+services:
+  gp.front:
+    container_name: "frontend"
+    hostname: "gp.front"
+    build: ./front
+    ports:
+     - "3000:3000"
+  gp.back:
+    container_name: "backend"
+    hostname: "gp.back"
+    build: ./back
+    ports:
+     - "5000:5000"
+  gp.data:
+    container_name: "database"
+    hostname: "gp.data"
+    build: ./db
+    ports:
+     - "27017:27017"
