@@ -14,4 +14,6 @@ EXPOSE 3000
 
 ENV NAME Frontend
 
+ENV ENV PROD
+
 CMD ["npm", "run", "admin"]
