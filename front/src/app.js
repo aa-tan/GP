@@ -6,13 +6,14 @@ const port = 3000;
 
 var path = require('path');
 var viewPath = path.join(__dirname, 'views');
+var publicPath = path.join(__dirname, 'public/')
 
 // Setting up Express
 app.set('views', viewPath);
 app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('src/public'));
+app.use(express.static(publicPath));
 //app.use(express.cookieSession());
 
 
