@@ -7,8 +7,10 @@ var last_mouse_y = null;
 var mouseSpeed = [];
 var mouseEvents = 0
 var userAgent = {}
+var keypresses = 0
 
 function keyPressed(ele){
+    keypresses += 1
     if(ele == "username"){
         username_timestamps.push(Date.now());
     }
@@ -42,13 +44,14 @@ function bodyLoaded(){
     formatUserAgent()
 }
 
-// Gets all date from the user owo
+// Gets all data from the user owo
 function formSubmit(){
     // Typing speedz for username and password fields
     document.getElementById("speedUser").value = calculateTypingSpeed("username");
     document.getElementById("speedPass").value = calculateTypingSpeed("password");
     document.getElementById("deltaUser").value = calculateTypingDelta("username");
     document.getElementById("deltaPass").value = calculateTypingDelta("password");
+    document.getElementById("keypresses").value = keypresses
     // Avg mouse movement speeds and overall move events
     document.getElementById("speedMouse").value = calculateMouseSpeed();
     document.getElementById("mouseMoveEvents").value = mouseEvents
