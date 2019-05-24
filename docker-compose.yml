@@ -16,5 +16,10 @@ services:
     container_name: "database"
     hostname: "gp.data"
     build: ./db
+    volumes:
+      - "$PWD/db/mongo-entrypoint/:/docker-entrypoint-initdb.d"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=XX
+      - MONGO_INITDB_ROOT_PASSWORD=XX
     ports:
      - "27017:27017"
