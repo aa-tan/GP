@@ -7,6 +7,9 @@
 # Mongodb
 data/
 
+# Private keys
+config.py
+
 # Logs
 logs
 *.log
