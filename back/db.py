@@ -20,6 +20,15 @@ db = client.gp
 def authenticate(body):
     return True
 
+def get_user_data(collection_name, data_name):
+    collection = db[collection_name]
+    data = collection.find()
+    if data_name:
+        return[item.get(data_name) for item in data]
+    else:
+        return data
+
+
 # Saves data to collection
 def save_data(data):
     users = db.users
@@ -40,7 +49,3 @@ def check_credentials(data):
     if user and user['password'] == data['password']:
         return True
     return False
-
-# TODO: Checks behavior patterns
-def check_behavior(data):
-    return True
