@@ -3,7 +3,10 @@ from flask import request
 from flask_cors import CORS
 from util import *
 from db import *
+from analysis import *
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 CORS(app)
@@ -12,8 +15,11 @@ CORS(app)
 def login_process():
     data = bytes_to_object(request.data)
     if request.method == 'POST':
+        logging.info("Logging in")
         if check_credentials(data):
+            logging.info("Credentials checked")
             if check_behavior(data):
+                logging.info("Behavior checked\nLogin Succeeded")
                 client.close()
                 return "True"
         client.close()
