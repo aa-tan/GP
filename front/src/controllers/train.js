@@ -7,6 +7,7 @@ router.get('/',(req, res)=>{
 })
 
 router.post('/train', (req, res) => {
+    console.log(req.body)
     axios.post(`http://${process.env.BACK_SERVICE}:${process.env.BACK_PORT}/train`, req.body)
     .then((response)=>{
         if(response['data'] == "True"){

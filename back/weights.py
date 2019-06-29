@@ -1,0 +1,3 @@
+WEIGHTS = {
+    'speedPass':100
+}
