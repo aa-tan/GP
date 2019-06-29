@@ -5,6 +5,10 @@ def bytes_to_object(bytestring):
     obj = json.loads(string)
     return obj
 
+def string_to_list(string):
+    arr = string.split(',')
+    return [float(val) for val in arr]
+
 def random_password():
     with open("./10-million-password-list-top-1000.txt") as f:
         lines = f.readlines()
