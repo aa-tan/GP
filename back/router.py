@@ -22,8 +22,11 @@ def login_process():
                 logging.info("Behavior checked\nLogin Succeeded")
                 client.close()
                 return "True"
+            else:
+                client.close()
+                return "False"
         client.close()
-        return "False"
+        return "Invalid"
     client.close()
     return "Error"
 

@@ -10,4 +10,8 @@ router.get('/success', (req, res) => {
     res.render('result', {result:"success"})
 })
 
+router.get('/invalid', (req, res) => {
+    res.render('result', {result:"Invalid Password"})
+})
+
 module.exports = router

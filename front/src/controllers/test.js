@@ -23,6 +23,9 @@ router.post('/login', (req, res)=> {
         else if(response['data'] == 'False'){
             res.redirect('/failure')
         }
+        else if(response['data'] == 'Invalid'){
+            res.redirect('invalid')
+        }
     })
     .catch((error) => {
         console.log(error);
