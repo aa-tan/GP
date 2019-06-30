@@ -10,7 +10,6 @@ var userAgent = {}
 var keypresses = 0
 
 function keyPressed(ele){
-    keypresses += 1
     if(ele == "username"){
         username_timestamps.push(Date.now());
     }
@@ -77,12 +76,14 @@ function calculateMouseSpeed(){
     if(mouseSpeed == []){
         return 0;
     }
-    var mouseSum = 0.0;
-    for(var i = 0; i < mouseSpeed.length; i++){
-        mouseSum += mouseSpeed[i];
+    else{
+        var mouseSum = 0.0;
+        for(var i = 0; i < mouseSpeed.length; i++){
+            mouseSum += mouseSpeed[i];
+        }
+        var avg = mouseSum/mouseSpeed.length
+        return avg
     }
-    var avg = mouseSum/mouseSpeed.length
-    return avg
 }
 
 function formatUserAgent(){
@@ -129,3 +130,7 @@ function calculateTypingDelta(element){
     }
     return timeDeltas.toString();
 }
+
+document.addEventListener('keydown', function(){
+    keypresses += 1
+})
