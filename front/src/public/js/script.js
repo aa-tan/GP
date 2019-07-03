@@ -110,6 +110,9 @@ function formatOS(agentstring){
     if(agentstring.includes("Macintosh")){
         userAgent["OS"] = "Macintosh"
     }
+    else{
+        userAgent["OS"] = "Other"
+    }
 }
 
 function calculateTypingDelta(element){
