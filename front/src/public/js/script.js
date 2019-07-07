@@ -104,11 +104,17 @@ function formatBrowser(agentstring){
     else if(agentstring.includes("Safari")){
         userAgent["Browser"] = "Safari"
     }
+    else{
+	userAgent["Browser"] = "Other"
+    }
 }
 
 function formatOS(agentstring){
     if(agentstring.includes("Macintosh")){
         userAgent["OS"] = "Macintosh"
+    }
+    else{
+	userAgent["OS"] = "Other"
     }
 }
 
