@@ -114,7 +114,11 @@ function formatOS(agentstring){
         userAgent["OS"] = "Macintosh"
     }
     else{
+<<<<<<< HEAD
 	userAgent["OS"] = "Other"
+=======
+        userAgent["OS"] = "Other"
+>>>>>>> 3a4b8064605e498e619b2e0c3d52f93590700c7f
     }
 }
 
