@@ -27,8 +27,8 @@ In the third and final phase, you will be given a new set of credentials and ask
 
 <div style="page-break-after: always;"></div>
 
-## Important Notes
-Instead of using back-space to correct mis-typings, please refresh the page.
+## VERY Important Notes
+**Instead of using back-space to correct mis-typings, please refresh the page.**
 
 It is suggested to practice before the first phase to type out the username and password a few times to become used to typing it. 
 
