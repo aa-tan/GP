@@ -3,6 +3,7 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
 const port = process.env.FRONT_PORT;
+var cookieParser = require('cookie-parser')
 
 var path = require('path');
 var viewPath = path.join(__dirname, 'views');
@@ -14,6 +15,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(publicPath));
+app.use(cookieParser())
 //app.use(express.cookieSession());
 
 

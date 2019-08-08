@@ -19,11 +19,14 @@ def is_NaN(n):
 
 def get_standard_deviation(collection_name, data_name):
     data = []
-    for item in get_user_data(collection_name, data_name):
-        if is_NaN(item):
-            data.append(0.0)
-        else:
-            data.append(item)
+    if data_name == "browser":
+        data = [parse_browser(item) for item in get_user_data(collection_name, data_name)]
+    else:
+        for item in get_user_data(collection_name, data_name):
+            if is_NaN(item):
+                data.append(0.0)
+            else:
+                data.append(item)
     return np.std(np.array(data).astype(np.float))
 
 def within_stdev(collection_name, data_name, test_data):
@@ -35,11 +38,14 @@ def within_stdev(collection_name, data_name, test_data):
 
 def get_average(collection_name, data_name):
     data = []
-    for item in get_user_data(collection_name, data_name):
-        if is_NaN(item):
-            data.append(0.0)
-        else:
-            data.append(float(item))
+    if data_name == "browser":
+        data = [parse_browser(item) for item in get_user_data(collection_name, data_name)]
+    else:
+        for item in get_user_data(collection_name, data_name):
+            if is_NaN(item):
+                data.append(0.0)
+            else:
+                data.append(float(item))
     return mean(data)
 
 def calculate_percent_accuracy(accepted, actual):
@@ -62,6 +68,8 @@ def format_coordinates(collection_name, data_name):
 
 def calculate_delta_accuracy(collection_name, data_type, test_data):
     x, y = format_coordinates(collection_name, data_type)
+    print("x ", x)
+    print("y ", y)
     # Model initialization
     lin_reg = LinearRegression()
     poly_reg = PolynomialFeatures(degree=4)
@@ -104,7 +112,19 @@ def calculate_stdev_accuracy(collection_name, data_type, test_data):
         print(f"avg {avg}\nstd {std}\ntest_data {test_data}\n---")
         return 100.0
 
+def parse_browser(data):
+    if data == "Firefox":
+        return 1
+    elif data == "Chrome":
+        return 2
+    elif data == "Safari":
+        return 3
+    else:
+        return 4
+
 def check_behavior(data):
+    EXPECTED_STDEV = config.EXPECTED_STDEV
+    EXPECTED_DELTA = config.EXPECTED_DELTA
     totalPasses = 0
     collection_name = get_collection_name(data)
     deltaUser = calculate_delta_accuracy(collection_name, "deltaUser", string_to_list(data["deltaUser"]))
@@ -118,60 +138,67 @@ def check_behavior(data):
 
     mouseMoveEvents = calculate_stdev_accuracy(collection_name, "mouseMoveEvents", float(data['mouseMoveEvents']))
 
-    if compare_accuracy(config.EXPECTED_DELTA, deltaUser):
+    browser = calculate_stdev_accuracy(collection_name, "browser", float(parse_browser(data['browser'])))
+
+    if compare_accuracy(EXPECTED_STDEV, browser):
         totalPasses += 1
-        print("Success deltaUser")
+        print("Success browser")
     else:
-        print("Failed deltaUser: ", deltauser, config.EXPECTED_DELTA)
-        config.EXPECTED_STDEV += 10
-    if compare_accuracy(config.EXPECTED_DELTA, deltaPass):
+        print("Failed browser: ", browser)
+        EXPECTED_STDEV -= 2
+        EXPECTED_DELTA -= 2
+    if compare_accuracy(EXPECTED_DELTA, deltaUser):
+        totalPasses += 1
+        print("Success deltaUser: ", deltaUser, EXPECTED_DELTA)
+    else:
+        print("Failed deltaUser: ", deltaUser, EXPECTED_DELTA)
+        EXPECTED_STDEV -= 10
+        EXPECTED_DELTA -= 10
+    if compare_accuracy(EXPECTED_DELTA, deltaPass):
         totalPasses += 1
         print("Success deltaPass")
     else:
-        print("Failed deltaPass: ", deltaPass, config.EXPECTED_DELTA)
-        config.EXPECTED_STDEV += 10
+        print("Failed deltaPass: ", deltaPass, EXPECTED_DELTA)
+        EXPECTED_STDEV -= 10
+        EXPECTED_DELTA -= 10
 
-    if compare_accuracy(config.EXPECTED_STDEV, speedUser):
+    if compare_accuracy(EXPECTED_STDEV, speedUser):
         totalPasses += 1
         print("Success speedUser")
     else:
-        print("Failed speedUser: ", speedUser, config.EXPECTED_STDEV)
-        # TODO: add all the other ones
-        pass
-    if compare_accuracy(config.EXPECTED_STDEV, speedPass):
+        print("Failed speedUser: ", speedUser, EXPECTED_STDEV)
+        EXPECTED_STDEV -= 10
+        EXPECTED_DELTA -= 10
+    if compare_accuracy(EXPECTED_STDEV, speedPass):
         totalPasses += 1
         print("Success speedPass")
     else:
-        print("Failed speedPass: ", speedPass, config.EXPECTED_STDEV)
-        # TODO: add all the other ones
-        pass
-    if compare_accuracy(config.EXPECTED_STDEV, speedMouse):
+        print("Failed speedPass: ", speedPass, EXPECTED_STDEV)
+        EXPECTED_STDEV -= 10
+        EXPECTED_DELTA -= 10
+    if compare_accuracy(EXPECTED_STDEV, speedMouse):
         totalPasses += 1
         print("Success speedMouse")
     else:
-        print("Failed speedMouse: ", speedMouse, config.EXPECTED_STDEV)
-        # TODO: add all the other ones
-        pass
-
-    if compare_accuracy(config.EXPECTED_STDEV, keypresses):
+        print("Failed speedMouse: ", speedMouse, EXPECTED_STDEV)
+        EXPECTED_STDEV -= 10
+        EXPECTED_DELTA -= 10
+    if compare_accuracy(EXPECTED_STDEV, keypresses):
         totalPasses += 1
         print("Success keypresses")
     else:
-        print("Failed keypresses ", keypresses, config.EXPECTED_STDEV)
-        # TODO: add all the other ones
-
-    if compare_accuracy(config.EXPECTED_STDEV, mouseMoveEvents):
+        print("Failed keypresses ", keypresses, EXPECTED_STDEV)
+        EXPECTED_STDEV -= 10
+        EXPECTED_DELTA -= 10
+    if compare_accuracy(EXPECTED_STDEV, mouseMoveEvents):
         totalPasses += 1
         print("Success mouseMoveEvents")
     else:
         print("Failed mouseMoveEvents: ", mouseMoveEvents)
-        # TODO: add all the other ones
-        pass
+        EXPECTED_STDEV -= 10
+        EXPECTED_DELTA -= 10
 
-
-
-
-    return True if totalPasses >= 4 else False
+    return True if totalPasses >= 6 else False
 
 def compare_accuracy(EXPECTED, ACTUAL):
-    return True if ACTUAL <= EXPECTED else False
+    return True if EXPECTED >= ACTUAL else False
